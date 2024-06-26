@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container">
+  <div class="row gap-lg-5">
+    <div class="col-lg-4 d-flex flex-column align-items-center gap-2">
+      <img class="person-working" src="{{ kelas.foto.url }}" />
+      <h2 class="fw-semibold">{{ kelas.nama_kelas }}</h2>
+      <p>by {{ kelas.mentor.pengguna.nama }}</p>
+    </div>
+
+    <div class="col-lg-5 mx-lg-3 my-auto">
+      <div class="d-flex flex-column gap-3">
+        <div>{{ kelas.deskripsi }}</div>
+        <a
+          type="submit"
+          class="btn btn-primary w-25 py-2"
+          href="{{ kelas.silabus }}"
+        >
+          Unduh Silabus
+        </a>
+      </div>
+      <div class="d-flex flex-column gap-2 mt-4">
+        <h3>Available Class</h3>
+        <p>Pilih kelas untuk melanjutkan</p>
+        <div class="d-flex gap-4">
+          {% for paket in paket_kelas %}
+          <div
+            class="card d-flex flex-column justify-content-center align-items-center text-center gap-3"
+            style="
+              border-radius: 20px;
+              padding: 24px;
+              width: 188px;
+              box-shadow: 0px 4px 4px rgba(20, 112, 239, 0.4);
+            "
+          >
+            <h5 class="card-title fw-semibold" style="font-size: 16px">
+              {{ paket.nama }}
+            </h5>
+            <p
+              class="w-100"
+              style="background-color: #dcfae6; border-radius: 8px"
+            >
+            {{ paket.tipe }}
+            </p>
+            <div style="font-size: 14px">
+              <div class="d-flex flex-column align-items-start justify-content-between gap-2">
+                <p>{{ paket.hari }}</p>
+                <p>{{ paket.jam }}</p>
+                <p>Harga: {{ paket.harga_kelas }}</p>
+                <p>Total pertemuan: {{ paket.jumlah_pertemuan }}</p>
+              </div>
+            </div>
+            <a
+              href="{% url 'transaksi' kelas.id paket.id %}"
+              class="d-flex text-decoration-none align-items-center gap-2 fw-semibold"
+            >
+              <span>Pilih Kelas</span>
+              <img
+                src="{% static 'assets/icons/chevron-right.svg' %}"
+                alt="Chevron Right Icon"
+              />
+            </a>
+          </div>
+          {% endfor %}
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

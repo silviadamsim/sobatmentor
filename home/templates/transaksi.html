@@ -1,0 +1,134 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container-fluid">
+  <div class="d-flex flex-column align-items-center gap-3">
+    <h1 class="fw-bold">Booking Kelas</h1>
+    <h4 class="fw-normal fs-5" style="color: #667085">
+      Selesaikan pemesanan untuk mendapatkan mentor yang kamu inginkan!
+    </h4>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-6">
+      <div class="card shadow-sm px-4 py-3" style="border-color: #1470ef">
+        <div class="card-body">
+          <h5 class="card-title fw-bold mb-3 fs-4">Info Pemesanan</h5>
+          <form method="post" action="{% url 'submittransaksi' %}">
+            {% csrf_token %}
+            <input type="hidden" name="kelas_id" value="{{ kelas.id }}" />
+            <input type="hidden" name="paket_id" value="{{ paket.id }}" />
+            <div class="mb-3">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control mt-2"
+                id="email"
+                style="background-color: #f0f5f8"
+                value="{{ user.email }}"
+                readonly
+              />
+            </div>
+            <div class="mb-3">
+              <label for="nama">Nama Lengkap</label>
+              <input
+                type="text"
+                class="form-control mt-2"
+                id="nama"
+                style="background-color: #f0f5f8"
+                value="{{ user.nama }}"
+                readonly
+              />
+            </div>
+
+            <div class="row">
+              <div class="col-6 mb-3">
+                <label for="alamat">Alamat</label>
+                <input
+                  type="text"
+                  class="form-control mt-2"
+                  id="alamat"
+                  style="background-color: #f0f5f8"
+                  name="alamat"
+                />
+              </div>
+              <div class="col-6 mb-3">
+                <label for="no_telp">Nomor WhatsApp</label>
+                <input
+                  type="text"
+                  class="form-control mt-2"
+                  id="no_telp"
+                  style="background-color: #f0f5f8"
+                  value="{{ user.no_telp }}"
+                  readonly
+                />
+              </div>
+            </div>
+
+            <div class="mb-4 d-flex flex-column gap-2">
+              <p class="fw-semibold">
+                Panduan Pembayaran
+                <a
+                  style="color: #2e90fa"
+                  class="fw-semibold text-decoration-none"
+                  href="#"
+                  >Lihat di sini.</a
+                >
+              </p>
+              <div class="d-flex align-items-center gap-2">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="rememberMe"
+                />
+                <p>
+                  Saya menyetujui semua
+                  <span style="color: #2e90fa">syarat dan ketentuan</span> yang
+                  berlaku.
+                </p>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 fw-semibold">
+              Konfirmasi Booking
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card shadow-sm px-4 py-3" style="border-color: #1470ef">
+        <div class="card-body">
+          <h5 class="card-title fw-bold mb-4 fs-4">Detail Pemesanan</h5>
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex justify-content-between">
+              <h6 style="color: #525a6a">Kode Kelas</h6>
+              <h6>{{ kelas.id }}</h6>
+            </div>
+            <div class="d-flex justify-content-between">
+              <h6 style="color: #525a6a">Nama Kelas</h6>
+              <h6>{{ kelas.nama_kelas }}</h6>
+            </div>
+            <div class="d-flex justify-content-between">
+              <h6 style="color: #525a6a">Nama Mentor</h6>
+              <h6>{{ mentor.pengguna.nama }}</h6>
+            </div>
+            <div class="d-flex justify-content-between">
+              <h6 style="color: #525a6a">Pilihan Kelas</h6>
+              <h6>{{ paket.nama }}</h6>
+            </div>
+            <div class="d-flex justify-content-between">
+              <h6 style="color: #525a6a">Jumlah Pertemuan</h6>
+              <h6>1 Pertemuan{{ paket.jumlah_pertemuan }}</h6>
+            </div>
+            <div class="d-flex justify-content-between">
+              <h6 style="color: #525a6a">Harga</h6>
+              <h6>Rp {{ paket.harga_kelas }}</h6>
+            </div>
+            <div class="d-flex justify-content-between">
+              <h6 style="color: #525a6a">No Bank Mentor</h6>
+              <h6>{{ metode_pembayaran.nomor_rekening }}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

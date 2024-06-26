@@ -1,0 +1,87 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+      <div class="container">
+        <section>
+            <div class="row">
+                <div class="col-auto border-20 form-bg w-50 p-4 rounded shadow-sm">
+                    <form
+                        method="post"
+                        action="{% url 'register' %}"
+                        enctype="multipart/form-data"
+                        class="fw-semibold"
+                        id="register-form"
+                    >
+                    {% csrf_token %}
+                    <div class="form-group d-flex flex-column gap-2">
+                        <label for="nama-lengkap">Nama Lengkap</label>
+                        <input class="form-controlusernameregis" type="text" id="nama-lengkap" >
+                    </div>
+                    <div class="form-group d-flex flex-column gap-2">
+                        <label for="tanggal-lahir">Tanggal Lahir</label>
+                        <div class="row">
+                            <div class="col-3">
+                                <input class="form-controlusernameregis" type="text" id="day" placeholder="Day" >
+                            </div>
+                            <div class="col-3">
+                                <input class="form-controlusernameregis" type="text" id="month" placeholder="Month" >
+                            </div>
+                            <div class="col-3">
+                                <input class="form-controlusernameregis" type="text" id="year" placeholder="Year" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group d-flex flex-column gap-2">
+                        <label for="jenis-kelamin">Jenis Kelamin</label>
+                        <div class="radio-group">
+                            <input type="radio" id="female" name="jenis-kelamin">
+                            <label for="female">Female</label>
+                            <input type="radio" id="male" name="jenis-kelamin">
+                            <label for="male">Male</label>
+                            <input type="radio" id="secret" name="jenis-kelamin">
+                            <label for="secret">Secret</label>
+                        </div>
+                    </div>
+                    <div class="form-group d-flex flex-column gap-2">
+                        <label for="email">Email</label>
+                        <input class="form-controlusernameregis" type="email" id="email" >
+                    </div>
+                    <div class="form-group d-flex flex-column gap-2">
+                        <label for="nomor-whatsapp">Nomor WhatsApp</label>
+                        <input class="form-controlusernameregis" type="text" id="nomor-whatsapp">
+                    </div>
+                </div>
+                <div class="col-auto border-20 form-bg w-50 p-4 rounded shadow-sm">
+                    <div class="form-group d-flex flex-column gap-2">
+                        <label for="alamat-lengkap">Alamat Lengkap</label>
+                        <textarea class="form-controlusernameregis" id="alamat-lengkap" ></textarea>
+                    </div>
+                    <div class="form-group d-flex flex-column gap-2">
+                        <label for="domisili">Domisili</label>
+                        <input class="form-controlusernameregis" type="text" id="domisili">
+                    </div>
+                    <div class="form-group d-flex flex-column gap-2">
+                        <label for="asal-universitas">Asal Universitas</label>
+                        <input class="form-controlusernameregis" type="text" id="asal-universitas">
+                    </div>
+                    <div class="form-group d-flex flex-column gap-2">
+                        <label for="program-studi">Program Studi</label>
+                        <input  class="form-controlusernameregis" type="text" id="program-studi">
+                    </div>
+                    <div class="form-group d-flex flex-column gap-2">
+                        <label for="semester">Semester</label>
+                        <input class="form-controlusernameregis" type="text" id="semester" >
+                    </div>
+                </div>
+            </div>
+
+            <div class="end" >
+                <a href="{% url 'jadimentor' %}" class="accordion-buttonregis" type="submit">Daftar</a>
+            </div>
+        </form>
+            <!-- Add the pop-up notification HTML -->
+   
+        </section>
+    </div>
+
+    {% endblock %} {% block footer %} {% endblock %}
+    

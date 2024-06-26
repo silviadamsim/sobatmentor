@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="profile">
+    <div class="overlap">
+        <img class="w-100" src="{% static 'assets/images/bg-profil.png' %}" />
+
+        <div class="group">
+            <div class="div">{{ pengguna.nama }}</div>
+            <div class="text-wrapper-2">{{ pengguna.username }}</div>
+            <div class="overlap-group">
+                <img class="Images" src="{% static 'assets/images/photo-profil.png' %}" />
+            </div>
+        </div>
+        <form method="GET" action="{% url 'edit_profile' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+        <div class="frame-wrapper">
+            <div class="frame">
+                <div class="text-lg-semibold">Identitas Diri</div>
+                <form method="post" action="{% url 'edit_profile' %}">
+                    {% csrf_token %}
+                <div class="frame-2">
+                    <div class="frame-3">
+                      <div class="frame-4">
+                        <div class="text-md-reguler">Username :</div>
+                        <div class="overlap-group-wrapper">
+                          <input class="div-wrapper" type="text" id="username" name="username" value="{{ pengguna.username }}"><div class="text-wrapper-5"></div></input>
+                        </div>
+                      </div>
+                      
+                      <div class="frame-4">
+                        <div class="text-md-reguler">Nomor Telepon :</div>
+                        <div class="overlap-group-wrapper">
+                            <input class="div-wrapper" type="text" id="no_telp" name="no_telp" value="{{ pengguna.no_telp }}"><div class="text-wrapper-5"></div></input>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="frame-5">
+                      <div class="frame-6">
+                        <div class="frame-4">
+                            <div class="text-md-reguler">Nama :</div>
+                            <div class="overlap-group-wrapper">
+                                <input class="div-wrapper" type="text" id="nama" name="nama" value="{{ pengguna.nama }}"><div class="text-wrapper-5"></div></input>
+                            </div>
+                        </div>
+                        <div class="frame-4">
+                            <div class="text-md-reguler">Email :</div>
+                            <div class="overlap-group-wrapper">
+                                <input class="div-wrapper" type="text" id="nama" name="nama" value="{{ pengguna.email }}"><div class="text-wrapper-5"></div></input>
+                            </div>
+                        </div>
+                      </div>
+                      <button type="submit"class="button-link bg--brand-solid text-white text-md-medium">Edit</button>
+                    </div>
+                  </div>
+            </div>
+        </form>
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock %} {% block footer %} {% endblock %}

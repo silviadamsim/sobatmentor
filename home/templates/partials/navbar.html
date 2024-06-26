@@ -1,0 +1,92 @@
+{% load static %}
+<div class="navbar-top">
+  <div class="logo">
+    <img src="{% static 'assets/images/logo.png' %}" alt="Logo Carimentor" />
+    <p class="text-md-semibold text--brand-secondary">Sobat Mentor</p>
+  </div>
+  <div class="nav-fitur">
+    <a
+      href="{% url 'beranda' %}"
+      class="navbar-link text-md-reguler text--primary {% if page_title == 'Home' %}active{% endif %}"
+      >Home</a
+    >
+    <a
+      href="{% url 'carimentor' %}"
+      class="navbar-link text-md-reguler text--primary {% if page_title == 'Cari Mentor' %}active{% endif %} "
+      >Cari Mentor</a
+    >
+    {% comment %} <a href="#" class="navbar-link text-md-reguler text--primary">Cari Kelas</a> {% endcomment %}
+    <a 
+    href="{% url 'jadimentor' %}" 
+    class="navbar-link text-md-reguler text--primary {% if page_title == 'Jadi Mentor' %}active{% endif %}"
+      >Jadi Mentor</a
+    >
+  </div>
+  {% if pengguna %}
+  <div class="nav-profil position-relative">
+    <a
+      href="#"
+      class="button-link text-md-medium text--primary"
+      id="profile-dropdown-toggle"
+    >
+      <img src="{% static 'assets/icons/user.svg' %}" class="me-2" />Hai, {{ pengguna.nama }}
+    </a>
+    <div class="dropdown-menu" id="profile-dropdown-menu" style="display: none">
+      <a
+        href="{% url 'profile' %}"
+        class="dropdown-item text-md-medium text--primary"
+        >Profil</a
+      >
+      <a
+        href="{% url 'aktivitas' %}"
+        class="dropdown-item text-md-medium text--primary"
+        >Aktivitas</a
+      >
+      <a
+        href="{% url 'logout' %}"
+        class="dropdown-item text-md-medium text--brand-primary"
+        >Logout</a
+      >
+    </div>
+  </div>
+  {% else %}
+  <div class="nav-auth">
+    <a
+      href="{% url 'login' %}"
+      class="button-link text-md-medium text--white bg--brand-solid"
+      >Sign In</a
+    >
+    <a
+      href="{% url 'register' %}"
+      class="button-link text-md-medium text--brand-primary"
+      >Sign Up</a
+    >
+  </div>
+  {% endif %}
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const profileDropdownToggle = document.getElementById(
+      "profile-dropdown-toggle"
+    );
+    const profileDropdownMenu = document.getElementById(
+      "profile-dropdown-menu"
+    );
+
+    profileDropdownToggle.addEventListener("click", function (event) {
+      event.preventDefault();
+      profileDropdownMenu.style.display =
+        profileDropdownMenu.style.display === "none" ? "block" : "none";
+    });
+
+    document.addEventListener("click", function (event) {
+      if (
+        !profileDropdownToggle.contains(event.target) &&
+        !profileDropdownMenu.contains(event.target)
+      ) {
+        profileDropdownMenu.style.display = "none";
+      }
+    });
+  });
+</script>

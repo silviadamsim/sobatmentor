@@ -1,0 +1,177 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center vh-100">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="form-bg w-100 p-4 rounded shadow-sm">
+        <h2 class="text-center mb-4 fw-bold">Sign Up</h2>
+        <h5 class="text-center mb-4 fw-lighter" style="color: #858d9d">
+          Daftarkan akunmu sekarang juga!
+        </h5>
+
+        <div style="padding-left: 160px; padding-right: 160px">
+          <form
+            method="post"
+            action="{% url 'register' %}"
+            enctype="multipart/form-data"
+            class="fw-semibold"
+            id="register-form"
+          >
+            {% csrf_token %}
+            <div class="form-group d-flex flex-column gap-2">
+              <label for="nama"
+                >Nama <span style="color: #f14437">*</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nama"
+                name="nama"
+                required
+              />
+            </div>
+            <div class="form-group d-flex flex-column gap-2 mt-4">
+              <label for="username"
+                >Username <span style="color: #f14437">*</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+              />
+            </div>
+            <div class="form-group d-flex flex-column gap-2 mt-4">
+              <label for="email"
+                >Email <span style="color: #f14437">*</span></label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="form-group d-flex flex-column gap-2 mt-4">
+              <label for="no_telp"
+                >Nomor WhatsAapp <span style="color: #f14437">*</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="no_telp"
+                name="no_telp"
+                required
+              />
+            </div>
+            <div class="form-group d-flex flex-column mt-4 position-relative">
+              <label for="sandi"
+                >Password <span style="color: #f14437">*</span></label
+              >
+              <div class="position-relative">
+                <input
+                  type="password"
+                  class="form-control mt-2 pe-5"
+                  id="sandi"
+                  name="sandi"
+                  required
+                />
+                <small
+                  class="form-text fw-normal"
+                  style="color: #858d9d; font-size: small"
+                  >Minimal 6 karakter</small
+                >
+                <img
+                  src="{% static 'assets/icons/eye-off.svg' %}"
+                  class="toggle-password"
+                  data-target="#sandi"
+                  style="
+                    position: absolute;
+                    top: 50%;
+                    right: 10px;
+                    transform: translateY(-80%);
+                    cursor: pointer;
+                  "
+                />
+              </div>
+            </div>
+            <div
+              class="form-group d-flex flex-column gap-2 mt-4 position-relative"
+            >
+              <label for="conf-password"
+                >Konfirmasi Password
+                <span style="color: #f14437">*</span></label
+              >
+              <div class="position-relative">
+                <input
+                  type="password"
+                  class="form-control pe-5"
+                  id="conf-password"
+                  name="conf-password"
+                  required
+                />
+                <img
+                  src="{% static 'assets/icons/eye-off.svg' %}"
+                  class="toggle-password"
+                  data-target="#conf-password"
+                  style="
+                    position: absolute;
+                    top: 50%;
+                    right: 10px;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                  "
+                />
+              </div>
+              <small
+                id="password-match-error"
+                class="form-text fw-normal text-danger"
+                style="display: none"
+                >Password dan Konfirmasi Password harus sama</small
+              >
+            </div>
+
+            <div class="d-flex flex-column mt-4">
+              <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+            <div class="text-center mt-4 fw-normal">
+              Sudah punya akun?
+              <a href="{% url 'login' %}" style="color: #2e90fa; text-decoration: none" >Sign In</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll(".toggle-password").forEach(function (toggle) {
+    toggle.addEventListener("click", function () {
+      const target = document.querySelector(this.getAttribute("data-target"));
+      const type =
+        target.getAttribute("type") === "password" ? "text" : "password";
+      target.setAttribute("type", type);
+      this.src =
+        type === "password"
+          ? "{% static 'assets/icons/eye-off.svg' %}"
+          : "{% static 'assets/icons/eye.svg' %}";
+    });
+  });
+
+  document
+    .getElementById("register-form")
+    .addEventListener("submit", function (event) {
+      const password = document.getElementById("sandi").value;
+      const confirmPassword = document.getElementById("conf-password").value;
+      const error = document.getElementById("password-match-error");
+      if (password !== confirmPassword) {
+        event.preventDefault();
+        error.style.display = "block";
+      } else {
+        error.style.display = "none";
+      }
+    });
+</script>
+{% endblock %} {% block footer %} {% endblock %}
